@@ -7,16 +7,14 @@ namespace TODO
     class Program
     {
         static Task[] taskList = new Task[100];
-
+        static int taskIdCounter = 1;
         static void Main(string[] args)
         {
-            
-
+            int taskIdCounter = 1;
             bool shouldNotExit = true;
 
-            Task[] tasks = new Task[100];
-
             while (shouldNotExit)
+
             {
                 Clear();
 
@@ -35,15 +33,28 @@ namespace TODO
                         Write("Title: ");
                         string title = ReadLine();
 
-                        Write("Due date (yy-mm-dd hh:mm): ");
+                        Write("Due date (yyyy-mm-dd hh:mm): ");
                         DateTime dueDate = DateTime.Parse(ReadLine());
 
-                        tasks[0] = new Task(title, dueDate);
+                        taskList[GetIndexPosition()] = new Task(taskIdCounter++, title, dueDate); ;
 
                         break;
 
                     case ConsoleKey.D2:
 
+                        WriteLine("ID    Title                        Due date       Completed       ");
+                        WriteLine("-----------------------------------------------------------");
+
+                        foreach (var task in taskList)
+                        {
+                            if (task == null) continue;
+                            {
+                                WriteLine($"{task.Id}    {task.Title}{task.DueDate.ToString().PadLeft(44, ' ')}");
+                            }
+
+                        }
+
+                        ReadKey(true);
                         break;
 
                     case ConsoleKey.D3:
@@ -52,6 +63,28 @@ namespace TODO
                 }
             }
 
+        }
+
+        static int GetIndexPosition()
+        {
+            int result = -1;
+            for (int i = 0; i < taskList.Length; i++)
+            {
+                if (taskList[i] != null)
+                {
+                    continue;
+                }
+                if (taskList[i] == null)
+                {
+                    result = i;
+                    break;
+                }
+                if (result == -1)
+                {
+                    throw new Exception("No avalible position");
+                }
+            }
+            return result;
         }
     }
 }

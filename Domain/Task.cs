@@ -4,11 +4,24 @@ namespace TODO.Domain
 {
     class Task
     {
-        public string Title { get; set; }
-        public DateTime DueDate { get; set; }
+        public int Id { get; set; }
 
-        public Task(string title, DateTime dueDate)
+        public string Title { get; set; }
+        public DateTime? DueDate { get; set; }
+        public DateTime? Completed { get; set; }
+        public bool IsCompleted
         {
+            get
+
+            {
+                return Completed != null;
+            }
+        }
+
+
+        public Task(int id, string title, DateTime dueDate)
+        {
+            Id = Id;
             Title = title;
             DueDate = dueDate;
         }
