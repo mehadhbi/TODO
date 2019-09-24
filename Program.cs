@@ -1,15 +1,20 @@
 ﻿using System;
+using TODO.Domain;
 using static System.Console;
 
 namespace TODO
 {
     class Program
     {
+        static Task[] taskList = new Task[100];
+
         static void Main(string[] args)
         {
-
+            
 
             bool shouldNotExit = true;
+
+            Task[] tasks = new Task[100];
 
             while (shouldNotExit)
             {
@@ -26,6 +31,14 @@ namespace TODO
                 switch (pressedKey.Key)
                 {
                     case ConsoleKey.D1:
+
+                        Write("Title: ");
+                        string title = ReadLine();
+
+                        Write("Due date (yy-mm-dd hh:mm): ");
+                        DateTime dueDate = DateTime.Parse(ReadLine());
+
+                        tasks[0] = new Task(title, dueDate);
 
                         break;
 
